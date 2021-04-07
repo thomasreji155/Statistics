@@ -1,0 +1,104 @@
+---
+title: "non_parametric_tests"
+author: "20122011_thomaskutty"
+date: "05/12/2020"
+output: pdf_document
+---
+
+# Non parametric Tests
+## Thomaskutty _ 20122011 - 
+
+Question 1 
+signed test ( binomial ) 
+QUESTION 1
+AIM: To Check if there is a significant difference between pre-test and post-test scores of students.
+H0: There is no significant difference between pre-test and post-test scores (p=0.05)
+H1: There is a significant difference between pre-test and post-test scores (p!=0.05)
+----------------------------------------------------------
+```{r}
+pre = c(67,71,83,69,68,36,52,72,56,64,76,83,69,68)
+post = c(58,62,84,67,72,38,63,72,55,59,76,84,69,72)
+df = data.frame(pre,post)
+n = length(pre) 
+differences = df$pre -df$post
+positives = differences>0
+L = length(positives[positives == TRUE])
+binom.test(L,n,p = 0.5)
+```
+ans : since p value is higher than alpha we do not reject the null hypotheseis
+
+
+#  Question 2 
+
+------------------------------------------------
+------------------------------------------------------
+## Wilcox paired t test
+# Aim: To test if there is a significant difference in the employee performance before and after the training.
+# H0: There is no significant difference in the employee performance before and after the training(p=0.05).
+# H1: There is a significant difference in the employee performance before and after the training(p!=0.05).
+--------------------------------------------------------------
+```{r}
+
+x = c(61,62,55,62,59,74,62,57,64,62)
+y = c(59,63,52,54,59,70,67,65,59,71)
+# Create a data frame
+wilcox_data_paired <- data.frame( 
+    group = rep(c("before", "after"), each = 10),
+    weight = c(x,y))
+wilcox.test(x,y,
+            paired = T)
+
+```
+
+Conclusion: The p-value 1 is greater than 0.05 and we accept the null hypothesis. 
+Hence, there is no significant difference in the employee performance before and after the training.
+
+
+# Question 3                  
+
+run test
+H0: two data are randomly selected  
+H1: two data are not randomly selected 
+
+-----------------------------------------------------------------
+```{r}
+
+library(DescTools)
+x <- c("H","T", "T", "H", "H","H","T", "H", "T","T","T","H","H","T","T","T")
+RunsTest(x)
+
+```
+
+conclusion : p value is greater than 0.05 so we accept the null
+             that the two data are randomly selected 
+
+
+# Question 4
+## Man-Whiteny U test
+Aim: To check whether there is a significant difference between the sleep time taken by young age and old age people.
+H0: There is no significant difference in the sleep time taken by young and old people(p=0.05).
+H1: There is a significant difference in the sleep time taken by young and old people(p!=0.05).
+
+```{r}
+
+young = c(58,42,68,20,15,35,26,40,47,28)
+old = c(100,152,147,70,40,95,68,90,112,58)
+wilcox.test(young,old)
+
+```
+
+conclusion : the p value is less than 0.05 so we reject the null hypothesis 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
